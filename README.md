@@ -48,7 +48,8 @@ The modular nature of the project makes it easy to manage and extend with new fe
 ### 1.Clone the repository:
 
    
-    git clone https://github.com/yourusername/ecommerce-platform.git
+    git clone  https://github.com/sreenath-pydev/shop_cart.git
+   
 
 ### 2. Install dependencies:
 
