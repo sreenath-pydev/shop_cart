@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Product, CartItem
+from .models import Product, CartItem, UserAddress
 
 class UserRegistrationForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'True', 'class': 'form-control'}))
@@ -25,3 +25,8 @@ class CartForm(forms.ModelForm):
     class Meta:
         model = CartItem
         fields = ['quantity']
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = UserAddress
+        fields = ['customer_name', 'place', 'phone', 'state', 'pincode']
