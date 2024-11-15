@@ -1,4 +1,4 @@
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +20,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app',
+    
 ]
 
 MIDDLEWARE = [
@@ -110,3 +113,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/login/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+JAZZMIN_SETTINGS = {
+    "site_title": "ShopCart Admin",  
+    "site_header": "ShopCart Admin",       
+    "site_brand": "ShopCart",
+    'site_logo': '/app/images/shopcart_logo.jpg',
+    "welcome_sign": "Welcome to ShopCart Admin",  
+    "custom_css": "app/css/custom_admin.css",
+    "show_sidebar": True,                 
+    "show_navbar": True, 
+    "show_ui_builder": False,              
+    "navigation_expanded": True,         
+    "order_with_respect_to": ["Product", "CartItem"],  
+}
