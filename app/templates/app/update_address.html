@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Left Column: Button -->
+        <div class="col-md-4">
+            <h4>Actions</h4>
+            <a href="{% url 'update_address' %}" class="btn btn-secondary btn-block mb-3">
+                Update Address
+            </a>
+        </div>
+        
+        <!-- Right Column: Form -->
+        <div class="col-md-8">
+            <h2 class="mb-4">Update Address</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_customer_name" class="form-label">Full Name</label>
+                    <input type="text" name="customer_name" id="id_customer_name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_place" class="form-label">Place</label>
+                    <input type="text" name="place"  class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_phone" class="form-label">Phone</label>
+                    <input type="text" name="phone"  class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_state" class="form-label">State</label>
+                    {{ form.state }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_pincode" class="form-label">Pincode</label>
+                    <input type="text" name="pincode"  class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Address</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
