@@ -1,0 +1,64 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left side for product image -->
+            <div class="col-md-6">
+                <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+            </div>
+            
+            <!-- Right side for product details and buttons -->
+            <div class="col-md-6 text-center mt-5">
+                <h2>{{ product.name }}</h2>
+                <p><strong>Price:</strong> ${{ product.price }}</p>
+                <p><strong>Description:</strong> {{ product.description }}</p>
+                
+                <!-- Buttons in the same row -->
+                <div class="d-flex gap-3 mb-3">
+                    <!-- Add to Cart Form -->
+                    <form action="{% url 'add_to_cart' product.id %}" method="post" class="flex-fill">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success w-50">Add to Cart</button>
+                    </form>
+                    
+                    <!-- Buy Now Button -->
+                    <form action="#" method="post" class="flex-fill">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary w-50">Buy Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--Women's Products-->
+    <h2 class="text-center mb-4">Trending Products</h2>
+    <div class="owl-carousel owl-theme">
+        {% for product in all_products %}
+            <div class="item">
+                <div class="card h-100 shadow-sm">
+                    <a href="{% url 'product_detail' product.id %}">
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text mb-4">Price: ${{ product.price }}</p>
+                        <!-- Form for adding product to cart -->
+                        <form action="{% url 'add_to_cart' product.id %}" method="post" class="mt-auto">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success w-100">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No products available.</p>
+        {% endfor %}
+    </div>  
+    </div>
+
+<!--Footer-->
+{% block footer %}
+{% include "app/footer.html" %}
+{% endblock footer %}
+
+{% endblock %}
