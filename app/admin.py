@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, CartItem
+from .models import Product, CartItem, UserAddress
 from django.utils.html import format_html
 
 class ProductAdmin(admin.ModelAdmin):
@@ -24,3 +24,9 @@ class CartItemAdmin(admin.ModelAdmin):
     
 
 admin.site.register(CartItem, CartItemAdmin)
+
+class UserAddressAdmin(admin.ModelAdmin):   
+    list_display = ('customer_name', 'place', 'phone', 'state', 'pincode')  
+    search_fields = ('user__username', 'address', 'city', 'state')
+
+admin.site.register(UserAddress, UserAddressAdmin)
