@@ -2,6 +2,7 @@
 {% block title %}View Cart{% endblock %}
 {% block content %}
 <div class="container mt-4">
+    {% if cart_items %}
     <h2>Your Cart</h2>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -59,6 +60,9 @@
     </div>
 
     <h3>Total: ${{ total_amount }}</h3> <!-- Displaying total amount -->
-    <a href="#" class="btn btn-success">Proceed to Checkout</a>
+    <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+    {% else %}
+    <h4 class="text-center">cart id empty!</h4>
+    {% endif %}
 </div>
 {% endblock %}
