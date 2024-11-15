@@ -28,3 +28,21 @@ class CartItem(models.Model):
 
     def get_total_price(self):
         return self.quantity * self.product.price
+STATE_CHOICES = [
+    ('kerala', 'Kerala'),
+    ('karnataka', 'Karnataka'),
+    ('andhra', 'Andhra Pradesh'),
+]
+class UserAddress(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    customer_name = models.CharField(max_length=100 )
+    place = models.CharField(max_length=100, blank=True, null=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    state = models.CharField(
+        max_length=15,  
+        choices=STATE_CHOICES,
+        default=' ',
+        blank=True, null=True  
+    )
+    pincode = models.CharField(max_length=6 , blank=True, null=True)
+
