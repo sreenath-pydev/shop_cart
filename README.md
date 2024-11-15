@@ -7,7 +7,6 @@ This project is a basic e-commerce platform built with Django, allowing users to
 ### 1. User Authentication
 - **User Registration:** Users can sign up by creating an account. The registration form ensures that passwords and confirmation passwords match before saving user data.
 - **Login and Logout:** Users can log in using their username and password. Once authenticated, they can access protected pages like their cart. Users can log out to end their session.
-
 ### 2. Product Management
 - **Product Listings:** Products are organized by categories, such as Men's and Women's products. Each product includes details such as images, descriptions, and prices.
 - **Product Detail View:** Users can view detailed information about individual products, including a description, price, and an "Add to Cart" option.
@@ -50,19 +49,25 @@ The modular nature of the project makes it easy to manage and extend with new fe
    
     git clone  https://github.com/sreenath-pydev/shop_cart.git
    
+### 2. Navigate into the project directory:
+      cd ecommerce-platform
+### 3. Set up a virtual environment:
+      python -m venv venv
+### 4. Activate the virtual environment:
+      venv\Scripts\activate
 
-### 2. Install dependencies:
+### 5. Install dependencies:
 
 
     pip install -r requirements.txt
-### 3.Run migrations to set up the database:
+### 6.Run migrations to set up the database:
 
 
     python manage.py migrate
-### 4.Run the development server:
+### 7.Run the development server:
 
     python manage.py runserver
-### 5.Open your browser
+### 8.Open your browser
  and go to http://127.0.0.1:8000 to start using the platform.
 ### License
 This project is open source and available under the **MIT** License.
