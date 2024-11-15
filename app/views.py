@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.views.generic import DeleteView
-from .forms import UserRegistrationForm
-from .models import Product, CartItem
+from .forms import UserRegistrationForm, AddressForm
+from .models import Product, CartItem, UserAddress
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 
@@ -118,3 +118,74 @@ class RemoveFromCartView(DeleteView):
         self.object = self.get_object()
         self.object.delete()
         return redirect('view_cart')
+    
+@method_decorator(login_required, name='dispatch')
+class CheckoutView(View):
+    def get(self, request):
+        # Fetch cart items for the logged-in user
+        cart_items = CartItem.objects.filter(user=request.user)
+        total_price = sum(item.get_total_price() for item in cart_items)
+
+        # Fetch the user's address
+        try:
+            user_address = UserAddress.objects.get(user=request.user)
+            print(user_address.customer_name)
+        except UserAddress.DoesNotExist:
+            user_address = None
+
+        return render(request, 'app/checkout.html', {
+            'cart_items': cart_items,
+            'total_price': total_price,
+            'user_address': user_address
+        })
+
+    def post(self, request):
+        # Perform checkout operations
+        cart_items = CartItem.objects.filter(user=request.user)
+
+        if cart_items.exists():
+            # Clear the cart
+            cart_items.delete()
+
+            # Add success message
+            messages.success(request, "Checkout completed successfully!")
+        else:
+            messages.error(request, "Your cart is empty.")
+
+        # Redirect to the cart page
+        return redirect('order_success')
+
+@method_decorator(login_required, name='dispatch')
+class UpdateAddressView(View):
+    def get(self, request):
+        # Fetch the user's current address or initialize a blank form
+        try:
+            address_instance = UserAddress.objects.get(user=request.user)
+        except UserAddress.DoesNotExist:
+            address_instance = None
+
+        form = AddressForm(instance=address_instance)
+        return render(request, 'app/update_address.html', {'form': form})
+
+    def post(self, request):
+        # Handle form submission
+        try:
+            address_instance = UserAddress.objects.get(user=request.user)
+        except UserAddress.DoesNotExist:
+            address_instance = None
+
+        form = AddressForm(request.POST, instance=address_instance)
+
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+            address.save()
+            messages.success(request, "Address updated successfully!")
+            return redirect('checkout')  # Redirect to the checkout page
+        else:
+            messages.error(request, "Failed to update address. Please correct the errors.")
+        
+        return render(request, 'app/update_address.html', {'form': form})
+    
+def order_success(request):
+    return render(request, 'app/order_success.html')
