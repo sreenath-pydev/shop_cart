@@ -1,5 +1,8 @@
 # ShopCart E-Commerce Platform
 
+
+[Watch the Demo Video](https://drive.google.com/file/d/1xGtUTqVZeLZDTPJXVhUfAaZOfhBnq1jn/view?usp=sharing)
+
 This project is a basic e-commerce platform built with Django, allowing users to browse products, register, log in, manage their cart, and explore products by category. Below is an overview of its features and functionality.
 
 ## Key Features
