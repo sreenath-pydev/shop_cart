@@ -69,6 +69,21 @@ h2 {
     font-size: 1rem;
     font-weight: bold;
 }
+/* Live search */
+.SearchInput {
+    width: 300px;
+    position: relative;
+}
+
+#searchResults {
+    width: 100%; 
+    max-height: 400px;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    z-index: 1000; 
+}
 
 /* Responsive styles for small screens */
 @media (max-width: 768px) {

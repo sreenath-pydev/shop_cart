@@ -14,10 +14,12 @@ from .views import (
     ProductDetailView,
     CheckoutView,
     UpdateAddressView,
+    SearchView,
 )
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
+    path('search/', SearchView.as_view(), name='search'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginUserView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),

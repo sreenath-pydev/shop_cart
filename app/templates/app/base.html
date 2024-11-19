@@ -28,7 +28,26 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+            <!--Live Search-->
+            <div class="nav-item">
+                <div class="position-relative SearchInput">
+                    <input 
+                        id="liveSearchInput" 
+                        oninput="handleLiveSearch(event)" 
+                        class="form-control" 
+                        type="search" 
+                        placeholder="Search products..." 
+                        aria-label="Search"
+                    >
+                    <div 
+                        id="searchResults" 
+                        class="dropdown-menu  mt-1 shadow" 
+                        style="max-height: 400px;   overflow-y: auto;"
+                    ></div>
+                </div>
+
+            </div>
+            <!--Live Search End-->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">

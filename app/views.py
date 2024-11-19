@@ -7,7 +7,7 @@ from .forms import UserRegistrationForm, AddressForm
 from .models import Product, CartItem, UserAddress
 from django.contrib import messages
 from django.utils.decorators import method_decorator
-
+from django.http import JsonResponse
 
 class IndexView(View):
     def get(self, request):
@@ -18,7 +18,6 @@ class IndexView(View):
             'men_products': men_products,
             'women_products': women_products
         })
-    
 
 class CategoryView(View):
     def get(self, request, category_name):
@@ -189,3 +188,15 @@ class UpdateAddressView(View):
     
 def order_success(request):
     return render(request, 'app/order_success.html')
+
+class SearchView(View):
+    def get(self, request):
+        """Displays search results based on the query."""
+        query = request.GET.get("q")
+        if query:
+            products = Product.objects.filter(name__icontains=query)
+        else:
+            products = Product.objects.all()
+        return JsonResponse({"products": list(products.values())}, safe=False) 
+
+    
